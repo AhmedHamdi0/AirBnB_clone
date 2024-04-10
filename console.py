@@ -99,7 +99,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
 
-            instances = [str(instance) for key, instance in storage.all().items()
+            instances = [str(instance) for key, instance
+                         in storage.all().items()
                          if key.split('.')[0] == class_name]
         else:
             instances = [str(instance) for instance in storage.all().values()]
