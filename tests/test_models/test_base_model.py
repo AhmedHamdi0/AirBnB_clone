@@ -1,6 +1,7 @@
 import unittest
 
 from models.base_model import BaseModel
+"""Defines BaseModel Testing Class."""
 
 
 class TestBaseModelInstantiation(unittest.TestCase):

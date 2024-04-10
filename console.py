@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Defines Command Interpreter Class."""
 
 import cmd
 
