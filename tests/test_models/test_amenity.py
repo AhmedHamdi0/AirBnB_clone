@@ -9,7 +9,6 @@ from datetime import datetime
 from models.amenity import Amenity
 
 
-
 class TestAmenityInstantiation(unittest.TestCase):
     """Test cases for instantiating the Amenity class."""
 
@@ -59,6 +58,12 @@ class TestAmenityInstantiation(unittest.TestCase):
         obj.updated_at = date_time
         self.assertEqual(obj.updated_at, date_time)
 
+    def test_assign_name_attr(self):
+        """Test assigning a value to the 'name' attribute."""
+        obj = Amenity()
+        obj.name = "gaming"
+        self.assertEqual(obj.name, "gaming")
+
     def test_created_at_and_updated_at_are_at_creation(self):
         """Test if 'created_at' and 'updated_at' are equal at creation."""
         self.assertEqual(self.obj.created_at, self.obj.updated_at)
@@ -86,7 +91,7 @@ class TestAmenityInstantiation(unittest.TestCase):
         date_time = datetime.today()
         date_time_iso = date_time.isoformat()
         obj = Amenity(id="345", created_at=date_time_iso,
-                        updated_at=date_time_iso)
+                      updated_at=date_time_iso)
         self.assertEqual(obj.id, "345")
         self.assertEqual(obj.created_at, date_time)
         self.assertEqual(obj.updated_at, date_time)
@@ -101,7 +106,7 @@ class TestAmenityInstantiation(unittest.TestCase):
         date_time = datetime.today()
         date_time_iso = date_time.isoformat()
         obj = Amenity("22", id="345", created_at=date_time_iso,
-                        updated_at=date_time_iso)
+                      updated_at=date_time_iso)
         self.assertEqual(obj.id, "345")
         self.assertEqual(obj.created_at, date_time)
         self.assertEqual(obj.updated_at, date_time)
