@@ -58,6 +58,18 @@ class TestCityInstantiation(unittest.TestCase):
         obj.updated_at = date_time
         self.assertEqual(obj.updated_at, date_time)
 
+    def test_assign_state_id_attr(self):
+        """Test assigning a value to the 'state_id' attribute."""
+        obj = City()
+        obj.state_id = "44"
+        self.assertEqual(obj.state_id, "44")
+
+    def test_assign_name_attr(self):
+        """Test assigning a value to the 'name' attribute."""
+        obj = City()
+        obj.name = "Cairo"
+        self.assertEqual(obj.name, "Cairo")
+
     def test_created_at_and_updated_at_are_at_creation(self):
         """Test if 'created_at' and 'updated_at' are equal at creation."""
         self.assertEqual(self.obj.created_at, self.obj.updated_at)
