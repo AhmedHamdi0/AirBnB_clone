@@ -11,7 +11,3 @@ class Review(BaseModel):
     place_id: str = ""
     user_id: str = ""
     text: str = ""
-
-    def __init__(self, *args, **kwargs):
-        """Initialize a new Review object."""
-        super().__init__(*args, **kwargs)

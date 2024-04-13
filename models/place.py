@@ -19,7 +19,3 @@ class Place(BaseModel):
     latitude: float = 0.0
     longitude: float = 0.0
     amenity_ids: list[str] = []
-
-    def __init__(self, *args, **kwargs):
-        """Initialize a new Place object."""
-        super().__init__(*args, **kwargs)

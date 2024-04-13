@@ -12,7 +12,3 @@ class User(BaseModel):
     last_name: str = ""
     email: str = ""
     password: str = ""
-
-    def __init__(self, *args, **kwargs):
-        """Initialize a new User object."""
-        super().__init__(*args, **kwargs)
