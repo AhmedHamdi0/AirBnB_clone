@@ -25,12 +25,14 @@ class TestAmenityInstantiation(unittest.TestCase):
         self.assertTrue(hasattr(self.obj, 'id'))
         self.assertTrue(hasattr(self.obj, 'created_at'))
         self.assertTrue(hasattr(self.obj, 'updated_at'))
+        self.assertTrue(hasattr(self.obj, 'name'))
 
     def test_instance_attributes_types(self):
         """Test if instance attributes have the correct data types."""
         self.assertEqual(type(self.obj.created_at), datetime)
         self.assertEqual(type(self.obj.updated_at), datetime)
         self.assertEqual(type(self.obj.id), str)
+        self.assertEqual(type(self.obj.name), str)
 
     def test_two_instances_has_unique_ids(self):
         """Test if two instances have unique IDs."""
@@ -112,7 +114,7 @@ class TestAmenityInstantiation(unittest.TestCase):
         self.assertEqual(obj.updated_at, date_time)
 
 
-class TestBaseModelSave(unittest.TestCase):
+class TestAmenitySave(unittest.TestCase):
     """Test cases for saving Amenity instances."""
 
     def setUp(self):
@@ -169,7 +171,7 @@ class TestBaseModelSave(unittest.TestCase):
             self.assertIn(obj_id, f.read())
 
 
-class TestBaseModelToDict(unittest.TestCase):
+class TestAmenityToDict(unittest.TestCase):
     """Test cases for converting Amenity instances to dictionaries."""
 
     def setUp(self):

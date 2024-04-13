@@ -25,12 +25,16 @@ class TestCityInstantiation(unittest.TestCase):
         self.assertTrue(hasattr(self.obj, 'id'))
         self.assertTrue(hasattr(self.obj, 'created_at'))
         self.assertTrue(hasattr(self.obj, 'updated_at'))
+        self.assertTrue(hasattr(self.obj, 'state_id'))
+        self.assertTrue(hasattr(self.obj, 'name'))
 
     def test_instance_attributes_types(self):
         """Test if instance attributes have the correct data types."""
         self.assertEqual(type(self.obj.created_at), datetime)
         self.assertEqual(type(self.obj.updated_at), datetime)
         self.assertEqual(type(self.obj.id), str)
+        self.assertEqual(type(self.obj.state_id), str)
+        self.assertEqual(type(self.obj.name), str)
 
     def test_two_instances_has_unique_ids(self):
         """Test if two instances have unique IDs."""
@@ -97,7 +101,7 @@ class TestCityInstantiation(unittest.TestCase):
         date_time = datetime.today()
         date_time_iso = date_time.isoformat()
         obj = City(id="345", created_at=date_time_iso,
-                        updated_at=date_time_iso)
+                   updated_at=date_time_iso)
         self.assertEqual(obj.id, "345")
         self.assertEqual(obj.created_at, date_time)
         self.assertEqual(obj.updated_at, date_time)
@@ -112,13 +116,13 @@ class TestCityInstantiation(unittest.TestCase):
         date_time = datetime.today()
         date_time_iso = date_time.isoformat()
         obj = City("22", id="345", created_at=date_time_iso,
-                        updated_at=date_time_iso)
+                   updated_at=date_time_iso)
         self.assertEqual(obj.id, "345")
         self.assertEqual(obj.created_at, date_time)
         self.assertEqual(obj.updated_at, date_time)
 
 
-class TestBaseModelSave(unittest.TestCase):
+class TestCitySave(unittest.TestCase):
     """Test cases for saving City instances."""
 
     def setUp(self):
@@ -175,7 +179,7 @@ class TestBaseModelSave(unittest.TestCase):
             self.assertIn(obj_id, f.read())
 
 
-class TestBaseModelToDict(unittest.TestCase):
+class TestCityToDict(unittest.TestCase):
     """Test cases for converting City instances to dictionaries."""
 
     def setUp(self):
