@@ -1,11 +1,13 @@
 #!/usr/bin/python3
+
+"""Defines test cases for the Amenity class."""
+
 import os
 import unittest
 from datetime import datetime
 
 from models.amenity import Amenity
 
-"""Defines test cases for the Amenity class."""
 
 
 class TestAmenityInstantiation(unittest.TestCase):
