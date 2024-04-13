@@ -9,3 +9,7 @@ class Amenity(BaseModel):
     """A class representing an amenity."""
 
     name: str = ""
+
+    def __init__(self, *args, **kwargs):
+        """create new Amenity"""
+        super().__init__(self, *args, **kwargs)
