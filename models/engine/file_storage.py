@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+"""Defines the FileStorage class."""
+
 import json
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -21,26 +23,28 @@ class FileStorage:
 
     def all(self):
         """Return the dictionary of all stored objects."""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Add a new object to the storage."""
-        self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
+        class_name = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(class_name, obj.id)] = obj
 
     def save(self):
         """Serialize __objects to JSON file (__file_path)."""
-        with open(self.__file_path, 'w') as file:
-            serialized_objects = {key: obj.to_dict()
-                                  for key, obj in self.__objects.items()}
-            json.dump(serialized_objects, file, indent=4)
+        objs_dict = FileStorage.__objects
+        serialized_objects = {obj: objs_dict[obj].to_dict() for obj in objs_dict.keys()}
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(serialized_objects, f)
 
     def reload(self):
         """Deserialize JSON file to __objects (if file exists)."""
         try:
-            with open(self.__file_path, 'r') as file:
-                data = json.load(file)
-                for key, obj_dict in data.items():
-                    class_name, obj_id = key.split('.')
-                    self.__objects[key] = eval(class_name)(**obj_dict)
+            with open(FileStorage.__file_path) as f:
+                objs_dict = json.load(f)
+                for obj in objs_dict.values():
+                    cls_name = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(cls_name)(**obj))
         except FileNotFoundError:
-            pass
+            return
