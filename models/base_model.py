@@ -17,9 +17,11 @@ class BaseModel:
                 if key == '__class__':
                     continue
                 elif key == 'created_at':
-                    self.__dict__.update({'created_at': datetime.fromisoformat(value)})
+                    self.__dict__.update({'created_at':
+                                          datetime.fromisoformat(value)})
                 elif key == 'updated_at':
-                    self.__dict__.update({'updated_at': datetime.fromisoformat(value)})
+                    self.__dict__.update({'updated_at':
+                                          datetime.fromisoformat(value)})
                 else:
                     self.__dict__.update({key: value})
         else:

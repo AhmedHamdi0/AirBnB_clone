@@ -1,11 +1,12 @@
 #!/usr/bin/python3
+
+"""Defines test cases for the BaseModel class."""
+
 import os
 import unittest
 from datetime import datetime
 
 from models.base_model import BaseModel
-
-"""Defines test cases for the BaseModel class."""
 
 
 class TestBaseModelInstantiation(unittest.TestCase):
