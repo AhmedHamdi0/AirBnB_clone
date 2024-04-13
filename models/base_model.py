@@ -4,8 +4,7 @@
 
 import uuid
 from datetime import datetime
-
-import models
+from models import storage
 
 
 class BaseModel:
@@ -13,36 +12,40 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel instance."""
-        tform = "%Y-%m-%dT%H:%M:%S.%f"
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = self.created_at
-        if len(kwargs) != 0:
+        if kwargs:
             for key, value in kwargs.items():
-                if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, tform)
+                if key == '__class__':
+                    continue
+                elif key == 'created_at':
+                    self.__dict__.update({'created_at': datetime.fromisoformat(value)})
+                elif key == 'updated_at':
+                    self.__dict__.update({'updated_at': datetime.fromisoformat(value)})
                 else:
-                    self.__dict__[key] = value
+                    self.__dict__.update({key: value})
         else:
-            models.storage.new(self)
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self) -> str:
         """Return a string representation of the BaseModel instance."""
-        class_name = self.__class__.__name__
-        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Update the 'updated_at' timestamp to the current time."""
         self.updated_at = datetime.now()
-        models.storage.save()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self) -> dict:
         """
         Return a dictionary representation of the BaseModel instance
         with class name and timestamps.
         """
-        obj_dict = self.__dict__.copy()
-        obj_dict['created_at'] = self.created_at.isoformat()
-        obj_dict['updated_at'] = self.updated_at.isoformat()
-        obj_dict['__class__'] = self.__class__.__name__
+        obj_dict = {}
+        obj_dict.update({'__class__': self.__class__.__name__})
+        obj_dict.update(self.__dict__)
+        obj_dict.update({'created_at': self.created_at.isoformat(),
+                         'updated_at': self.updated_at.isoformat()})
         return obj_dict
