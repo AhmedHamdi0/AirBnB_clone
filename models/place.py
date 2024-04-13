@@ -4,6 +4,7 @@
 
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """A class representing a place."""
 
