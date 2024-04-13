@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """Defines the HBnB console."""
+
 import cmd
 import re
 from shlex import split
-from models import storage
+from models import storage, FileStorage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -39,6 +40,9 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    file_storage = FileStorage()
+    file_storage.reload()
+
     __classes = {
         "BaseModel",
         "User",
