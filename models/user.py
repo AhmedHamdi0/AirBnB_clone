@@ -12,7 +12,3 @@ class User(BaseModel):
     last_name: str = ""
     email: str = ""
     password: str = ""
-
-    def __init__(self, *args, **kwargs):
-        """create new User"""
-        super().__init__(self, *args, **kwargs)
