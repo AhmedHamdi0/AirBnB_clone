@@ -44,7 +44,8 @@ class FileStorage:
     def save(self):
         """Serialize __objects to JSON file (__file_path)."""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
-            data = {key: value.to_dict() for key, value in FileStorage.__objects.items()}
+            data = {key: value.to_dict()
+                    for key, value in FileStorage.__objects.items()}
             json.dump(data, file, indent=4)
 
     def reload(self):
