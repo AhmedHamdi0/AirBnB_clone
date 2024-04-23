@@ -1,9 +1,9 @@
-# AirBnB Clone
+# `AirBnB Clone`
 
 ![Project Logo](./images/hbnb.png)
 
-# 0x00. AirBnB clone - The console
+# `The Console`
 ![console step](./images/console.png)
 
-# 0x01. AirBnB clone - Web static
+# `Web Static`
 ![web static step](./images/web_static.png)
